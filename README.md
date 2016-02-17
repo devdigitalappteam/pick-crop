@@ -1,42 +1,43 @@
-## Picking an image from documents (either camera, gallery, Photos, Drive) edit it (if required).
+**Picking an image from documents (either camera, gallery, Photos, Drive) edit it (if required).**
 
-### How to use:
+# How to use:
 
-**Section A : Themeing**
-Copy these lines in styles.xml along with your theme. 
-
+## Section A : Themeing
+Copy these lines in **styles.xml** along with your theme. 
+```java
 <style name="NoActionBarAppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
-
-**Section B : AndroidManifest.xml**
+```
+## Section B : AndroidManifest.xml
 1. Copy these lines before <application> tag : 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 2. Declare this activity within <application></application> tag 
     <activity android:name="com.yalantis.ucrop.UCropActivity" android:theme="@style/NoActionBarAppTheme" android:screenOrientation="portrait"/>    
     
-**Section C: Gradle**
+## Section C: Gradle
 1. Go to your module's build.gradle and add this : 
+```java
     repositories {
     maven {
         url 'https://dl.bintray.com/devdigitalappteam/maven/'
     }
 }
+```
 
 2. Add this in dependancies : 
-    compile 'com.devdigital:pickcrop:1.0'
+    ```java 
+    compile 'com.devdigital:pickcrop:1.0' ```
     
 
-**Section D: In code**
+## Section D: In code
 1. Declaration
-
+```java
 public class MainActivity extends AppCompatActivity{
     private ImageHelper imageHelper;
     private UCropHelper uCropHelper;
 }
-
-
-
-2. Initialization 
-
+```
+<br>2. Initialization 
+```java
 	public class MainActivity extends AppCompatActivity implments UCropHelper.UCropImageCallback, ImageHelper.RuntimePermissionCallback{
     private ImageHelper imageHelper;
     private UCropHelper uCropHelper;
@@ -55,10 +56,11 @@ public class MainActivity extends AppCompatActivity{
         ImageHelper.onDestroy();
     }
 }    
-    
-3. Use image picking from Camera or Documents(Gallery)
+```  
+<br>3. Use image picking from Camera or Documents(Gallery)
 
-    public class MainActivity extends AppCompatActivity implments UCropHelper.UCropImageCallback, ImageHelper.RuntimePermissionCallback{
+```java
+	public class MainActivity extends AppCompatActivity implments UCropHelper.UCropImageCallback, ImageHelper.RuntimePermissionCallback{
     private ImageHelper imageHelper;
     private UCropHelper uCropHelper;
     @Override
@@ -68,8 +70,7 @@ public class MainActivity extends AppCompatActivity{
         
         imageHelper = new ImageHelper(this, this);
         uCropHelper = new UCropHelper(this, this);
-
-        imageHelper.pick(true); // true for picking image from camera, else false for taking picture from gallery
+		imageHelper.pick(true); // true for picking image from camera, else false for taking picture from gallery
 
     }
     @Override
@@ -139,3 +140,5 @@ public class MainActivity extends AppCompatActivity{
         ImageHelper.onDestroy();
     }   
 }
+```
+    
