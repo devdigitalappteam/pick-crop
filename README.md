@@ -21,16 +21,15 @@ Copy these lines in **styles.xml** along with your theme.
 ## Section C: Gradle
 1. Go to your module's build.gradle and add this : 
 ```java
-    repositories {
+repositories {
     maven {
         url 'https://dl.bintray.com/devdigitalappteam/maven/'
     }
 }
 ```
-
 2. Add this in dependancies : 
-    ```java 
-    compile 'com.devdigital:pickcrop:1.0' ```
+```java 
+compile 'com.devdigital:pickcrop:1.0' ```
     
 
 ## Section D: In code
@@ -41,20 +40,17 @@ public class MainActivity extends AppCompatActivity{
     private UCropHelper uCropHelper;
 }
 ```
-
 2. Initialization 
 ```java
-	public class MainActivity extends AppCompatActivity implments UCropHelper.UCropImageCallback, ImageHelper.RuntimePermissionCallback{
+public class MainActivity extends AppCompatActivity implments UCropHelper.UCropImageCallback, ImageHelper.RuntimePermissionCallback{
     private ImageHelper imageHelper;
     private UCropHelper uCropHelper;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
         imageHelper = new ImageHelper(this, this);
         uCropHelper = new UCropHelper(this, this);
-
     }
     @Override
     protected void onDestroy() {
@@ -63,22 +59,18 @@ public class MainActivity extends AppCompatActivity{
     }
 }    
 ```  
-
 3. Use image picking from Camera or Documents(Gallery)
-
 ```java
-	public class MainActivity extends AppCompatActivity implments UCropHelper.UCropImageCallback, ImageHelper.RuntimePermissionCallback{
+public class MainActivity extends AppCompatActivity implments UCropHelper.UCropImageCallback, ImageHelper.RuntimePermissionCallback{
     private ImageHelper imageHelper;
     private UCropHelper uCropHelper;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
         imageHelper = new ImageHelper(this, this);
         uCropHelper = new UCropHelper(this, this);
 		imageHelper.pick(true); // true for picking image from camera, else false for taking picture from gallery
-
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -88,7 +80,6 @@ public class MainActivity extends AppCompatActivity{
             public void onImagePickerError(Exception e, GlibImage.ImageSource source, int type) {
                 //Some error handling
             }
-
             @Override
             public void onImagePicked(File imageFile, GlibImage.ImageSource source, int type) {
                 // Handle the image
@@ -99,12 +90,9 @@ public class MainActivity extends AppCompatActivity{
                 .fit()
                 .centerCrop()
                 .into(imageView);*/
-                
-                
                 // or Pass image for cropping
                 uCropHelper.startCropping(Uri.fromFile(imageFile));
             }
-
             @Override
             public void onCanceled(GlibImage.ImageSource source, int type) {
                 //Cancel handling, you might wanna remove taken photo if it was canceled
@@ -114,7 +102,6 @@ public class MainActivity extends AppCompatActivity{
                 }
             }
         });
-        
         // If image cropping has been selected in above code the need to use this for cropping image. 
         uCropHelper.handleActivityResult(requestCode, resultCode, data);
     }
@@ -130,7 +117,6 @@ public class MainActivity extends AppCompatActivity{
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
-    
     @Override
     public void onPermissionGranted(boolean isCamera) {
         if (isCamera){
@@ -139,8 +125,6 @@ public class MainActivity extends AppCompatActivity{
             ImageHelper.onPickFromGaleryClicked();
         }
     }
-    
-    
     @Override
     protected void onDestroy() {
         super.onDestroy();
