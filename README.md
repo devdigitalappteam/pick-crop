@@ -8,11 +8,16 @@ Copy these lines in **styles.xml** along with your theme.
 <style name="NoActionBarAppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
 ```
 ## Section B : AndroidManifest.xml
-1. Copy these lines before <application> tag : 
+
+1. Copy these lines before application tag : 
+```java
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-2. Declare this activity within <application></application> tag 
-    <activity android:name="com.yalantis.ucrop.UCropActivity" android:theme="@style/NoActionBarAppTheme" android:screenOrientation="portrait"/>    
-    
+```
+2. Declare this activity within application tag : 
+```java
+<activity android:name="com.yalantis.ucrop.UCropActivity" android:theme="@style/NoActionBarAppTheme" android:screenOrientation="portrait"/>    
+```
+
 ## Section C: Gradle
 1. Go to your module's build.gradle and add this : 
 ```java
@@ -36,7 +41,8 @@ public class MainActivity extends AppCompatActivity{
     private UCropHelper uCropHelper;
 }
 ```
-<br>2. Initialization 
+
+2. Initialization 
 ```java
 	public class MainActivity extends AppCompatActivity implments UCropHelper.UCropImageCallback, ImageHelper.RuntimePermissionCallback{
     private ImageHelper imageHelper;
@@ -57,7 +63,8 @@ public class MainActivity extends AppCompatActivity{
     }
 }    
 ```  
-<br>3. Use image picking from Camera or Documents(Gallery)
+
+3. Use image picking from Camera or Documents(Gallery)
 
 ```java
 	public class MainActivity extends AppCompatActivity implments UCropHelper.UCropImageCallback, ImageHelper.RuntimePermissionCallback{
