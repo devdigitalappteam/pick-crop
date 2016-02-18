@@ -1,4 +1,8 @@
-**Picking an image from documents (either camera, gallery, Photos, Drive) edit it (if required).**
+# PickCrop
+Pickcrop provides a simple way yo picking an image from documents (either camera, gallery, Photos, Drive) and edit(Scale, Crop, Orientation, Zoom) it.
+
+Library used : [uCrop](https://github.com/Yalantis/uCrop)
+
 
 # How to use:
 
@@ -8,18 +12,16 @@ Copy these lines in **styles.xml** along with your theme.
 <style name="NoActionBarAppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
 ```
 ## Section B : AndroidManifest.xml
-
-1. Copy these lines before application tag : 
+Copy these lines before application tag : 
 ```java
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
-2. Declare this activity within application tag : 
+Declare this activity within application tag : 
 ```java
 <activity android:name="com.yalantis.ucrop.UCropActivity" android:theme="@style/NoActionBarAppTheme" android:screenOrientation="portrait"/>    
 ```
-
 ## Section C: Gradle
-1. Go to your module's build.gradle and add this : 
+Go to your module's build.gradle and add this : 
 ```java
 repositories {
     maven {
@@ -27,20 +29,19 @@ repositories {
     }
 }
 ```
-2. Add this in dependancies : 
-```java 
-compile 'com.devdigital:pickcrop:1.0' ```
-    
-
+Add this in dependancies : 
+```java
+compile 'com.devdigital:pickcrop:1.0'
+```
 ## Section D: In code
-1. Declaration
+Declaration
 ```java
 public class MainActivity extends AppCompatActivity{
     private ImageHelper imageHelper;
     private UCropHelper uCropHelper;
 }
 ```
-2. Initialization 
+Initialization
 ```java
 public class MainActivity extends AppCompatActivity implments UCropHelper.UCropImageCallback, ImageHelper.RuntimePermissionCallback{
     private ImageHelper imageHelper;
@@ -57,9 +58,9 @@ public class MainActivity extends AppCompatActivity implments UCropHelper.UCropI
         super.onDestroy();
         ImageHelper.onDestroy();
     }
-}    
-```  
-3. Use image picking from Camera or Documents(Gallery)
+}
+```
+Use image picking from Camera or Documents(Gallery)
 ```java
 public class MainActivity extends AppCompatActivity implments UCropHelper.UCropImageCallback, ImageHelper.RuntimePermissionCallback{
     private ImageHelper imageHelper;
@@ -105,7 +106,6 @@ public class MainActivity extends AppCompatActivity implments UCropHelper.UCropI
         // If image cropping has been selected in above code the need to use this for cropping image. 
         uCropHelper.handleActivityResult(requestCode, resultCode, data);
     }
-    
     /**
     * We need to use this for handling runtime permission. 
     */
@@ -132,4 +132,3 @@ public class MainActivity extends AppCompatActivity implments UCropHelper.UCropI
     }   
 }
 ```
-    
